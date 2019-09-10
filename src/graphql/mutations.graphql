@@ -1,0 +1,19 @@
+# this is an auto generated file. This will be overwritten
+mutation CreatePhoto($input: CreatePhotoInput!) {
+  createPhoto(input: $input) {
+    id
+    imageUrl
+  }
+}
+mutation UpdatePhoto($input: UpdatePhotoInput!) {
+  updatePhoto(input: $input) {
+    id
+    imageUrl
+  }
+}
+mutation DeletePhoto($input: DeletePhotoInput!) {
+  deletePhoto(input: $input) {
+    id
+    imageUrl
+  }
+}

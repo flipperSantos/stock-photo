@@ -1,0 +1,24 @@
+{
+	"auth": {
+		"stockphototestee0cb73f": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
+	"api": {
+		"stockPhotoTest": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"securityType": "AMAZON_COGNITO_USER_POOLS"
+			}
+		}
+	},
+	"storage": {
+		"s366ce46e8": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}
