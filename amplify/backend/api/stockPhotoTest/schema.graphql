@@ -1,4 +1,5 @@
-type Photo @model {
+type User @model {
   id: ID!
-  imageUrl: String!
+  username: String!
+  photos: [String]
 }

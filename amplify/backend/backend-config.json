@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"stockphototestee0cb73f": {
+		"stockphototestc6ae9c7c": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
@@ -16,7 +16,7 @@
 		}
 	},
 	"storage": {
-		"s366ce46e8": {
+		"s3a14f7633": {
 			"service": "S3",
 			"providerPlugin": "awscloudformation"
 		}

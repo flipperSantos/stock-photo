@@ -5,26 +5,29 @@ import API, { graphqlOperation } from "@aws-amplify/api";
 import { GraphQLResult } from "@aws-amplify/api/lib/types";
 import * as Observable from "zen-observable";
 
-export type CreatePhotoInput = {
+export type CreateUserInput = {
   id?: string | null;
-  imageUrl: string;
+  username: string;
+  photos?: Array<string | null> | null;
 };
 
-export type UpdatePhotoInput = {
+export type UpdateUserInput = {
   id: string;
-  imageUrl?: string | null;
+  username?: string | null;
+  photos?: Array<string | null> | null;
 };
 
-export type DeletePhotoInput = {
+export type DeleteUserInput = {
   id?: string | null;
 };
 
-export type ModelPhotoFilterInput = {
+export type ModelUserFilterInput = {
   id?: ModelIDFilterInput | null;
-  imageUrl?: ModelStringFilterInput | null;
-  and?: Array<ModelPhotoFilterInput | null> | null;
-  or?: Array<ModelPhotoFilterInput | null> | null;
-  not?: ModelPhotoFilterInput | null;
+  username?: ModelStringFilterInput | null;
+  photos?: ModelStringFilterInput | null;
+  and?: Array<ModelUserFilterInput | null> | null;
+  or?: Array<ModelUserFilterInput | null> | null;
+  not?: ModelUserFilterInput | null;
 };
 
 export type ModelIDFilterInput = {
@@ -53,68 +56,77 @@ export type ModelStringFilterInput = {
   beginsWith?: string | null;
 };
 
-export type CreatePhotoMutation = {
-  __typename: "Photo";
+export type CreateUserMutation = {
+  __typename: "User";
   id: string;
-  imageUrl: string;
+  username: string;
+  photos: Array<string | null> | null;
 };
 
-export type UpdatePhotoMutation = {
-  __typename: "Photo";
+export type UpdateUserMutation = {
+  __typename: "User";
   id: string;
-  imageUrl: string;
+  username: string;
+  photos: Array<string | null> | null;
 };
 
-export type DeletePhotoMutation = {
-  __typename: "Photo";
+export type DeleteUserMutation = {
+  __typename: "User";
   id: string;
-  imageUrl: string;
+  username: string;
+  photos: Array<string | null> | null;
 };
 
-export type GetPhotoQuery = {
-  __typename: "Photo";
+export type GetUserQuery = {
+  __typename: "User";
   id: string;
-  imageUrl: string;
+  username: string;
+  photos: Array<string | null> | null;
 };
 
-export type ListPhotosQuery = {
-  __typename: "ModelPhotoConnection";
+export type ListUsersQuery = {
+  __typename: "ModelUserConnection";
   items: Array<{
-    __typename: "Photo";
+    __typename: "User";
     id: string;
-    imageUrl: string;
+    username: string;
+    photos: Array<string | null> | null;
   } | null> | null;
   nextToken: string | null;
 };
 
-export type OnCreatePhotoSubscription = {
-  __typename: "Photo";
+export type OnCreateUserSubscription = {
+  __typename: "User";
   id: string;
-  imageUrl: string;
+  username: string;
+  photos: Array<string | null> | null;
 };
 
-export type OnUpdatePhotoSubscription = {
-  __typename: "Photo";
+export type OnUpdateUserSubscription = {
+  __typename: "User";
   id: string;
-  imageUrl: string;
+  username: string;
+  photos: Array<string | null> | null;
 };
 
-export type OnDeletePhotoSubscription = {
-  __typename: "Photo";
+export type OnDeleteUserSubscription = {
+  __typename: "User";
   id: string;
-  imageUrl: string;
+  username: string;
+  photos: Array<string | null> | null;
 };
 
 @Injectable({
   providedIn: "root"
 })
 export class APIService {
-  async CreatePhoto(input: CreatePhotoInput): Promise<CreatePhotoMutation> {
-    const statement = `mutation CreatePhoto($input: CreatePhotoInput!) {
-        createPhoto(input: $input) {
+  async CreateUser(input: CreateUserInput): Promise<CreateUserMutation> {
+    const statement = `mutation CreateUser($input: CreateUserInput!) {
+        createUser(input: $input) {
           __typename
           id
-          imageUrl
+          username
+          photos
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -123,14 +135,15 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <CreatePhotoMutation>response.data.createPhoto;
+    return <CreateUserMutation>response.data.createUser;
   }
-  async UpdatePhoto(input: UpdatePhotoInput): Promise<UpdatePhotoMutation> {
-    const statement = `mutation UpdatePhoto($input: UpdatePhotoInput!) {
-        updatePhoto(input: $input) {
+  async UpdateUser(input: UpdateUserInput): Promise<UpdateUserMutation> {
+    const statement = `mutation UpdateUser($input: UpdateUserInput!) {
+        updateUser(input: $input) {
           __typename
           id
-          imageUrl
+          username
+          photos
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -139,14 +152,15 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <UpdatePhotoMutation>response.data.updatePhoto;
+    return <UpdateUserMutation>response.data.updateUser;
   }
-  async DeletePhoto(input: DeletePhotoInput): Promise<DeletePhotoMutation> {
-    const statement = `mutation DeletePhoto($input: DeletePhotoInput!) {
-        deletePhoto(input: $input) {
+  async DeleteUser(input: DeleteUserInput): Promise<DeleteUserMutation> {
+    const statement = `mutation DeleteUser($input: DeleteUserInput!) {
+        deleteUser(input: $input) {
           __typename
           id
-          imageUrl
+          username
+          photos
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -155,14 +169,15 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <DeletePhotoMutation>response.data.deletePhoto;
+    return <DeleteUserMutation>response.data.deleteUser;
   }
-  async GetPhoto(id: string): Promise<GetPhotoQuery> {
-    const statement = `query GetPhoto($id: ID!) {
-        getPhoto(id: $id) {
+  async GetUser(id: string): Promise<GetUserQuery> {
+    const statement = `query GetUser($id: ID!) {
+        getUser(id: $id) {
           __typename
           id
-          imageUrl
+          username
+          photos
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -171,20 +186,21 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <GetPhotoQuery>response.data.getPhoto;
+    return <GetUserQuery>response.data.getUser;
   }
-  async ListPhotos(
-    filter?: ModelPhotoFilterInput,
+  async ListUsers(
+    filter?: ModelUserFilterInput,
     limit?: number,
     nextToken?: string
-  ): Promise<ListPhotosQuery> {
-    const statement = `query ListPhotos($filter: ModelPhotoFilterInput, $limit: Int, $nextToken: String) {
-        listPhotos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  ): Promise<ListUsersQuery> {
+    const statement = `query ListUsers($filter: ModelUserFilterInput, $limit: Int, $nextToken: String) {
+        listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
           __typename
           items {
             __typename
             id
-            imageUrl
+            username
+            photos
           }
           nextToken
         }
@@ -202,41 +218,44 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <ListPhotosQuery>response.data.listPhotos;
+    return <ListUsersQuery>response.data.listUsers;
   }
-  OnCreatePhotoListener: Observable<OnCreatePhotoSubscription> = API.graphql(
+  OnCreateUserListener: Observable<OnCreateUserSubscription> = API.graphql(
     graphqlOperation(
-      `subscription OnCreatePhoto {
-        onCreatePhoto {
+      `subscription OnCreateUser {
+        onCreateUser {
           __typename
           id
-          imageUrl
+          username
+          photos
         }
       }`
     )
-  ) as Observable<OnCreatePhotoSubscription>;
+  ) as Observable<OnCreateUserSubscription>;
 
-  OnUpdatePhotoListener: Observable<OnUpdatePhotoSubscription> = API.graphql(
+  OnUpdateUserListener: Observable<OnUpdateUserSubscription> = API.graphql(
     graphqlOperation(
-      `subscription OnUpdatePhoto {
-        onUpdatePhoto {
+      `subscription OnUpdateUser {
+        onUpdateUser {
           __typename
           id
-          imageUrl
+          username
+          photos
         }
       }`
     )
-  ) as Observable<OnUpdatePhotoSubscription>;
+  ) as Observable<OnUpdateUserSubscription>;
 
-  OnDeletePhotoListener: Observable<OnDeletePhotoSubscription> = API.graphql(
+  OnDeleteUserListener: Observable<OnDeleteUserSubscription> = API.graphql(
     graphqlOperation(
-      `subscription OnDeletePhoto {
-        onDeletePhoto {
+      `subscription OnDeleteUser {
+        onDeleteUser {
           __typename
           id
-          imageUrl
+          username
+          photos
         }
       }`
     )
-  ) as Observable<OnDeletePhotoSubscription>;
+  ) as Observable<OnDeleteUserSubscription>;
 }

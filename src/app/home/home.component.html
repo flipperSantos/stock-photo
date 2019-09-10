@@ -25,17 +25,19 @@
     <div class="form-group row">
       <div class="col-sm-12">
         <div class="md-form mt-0">
-          <i *ngIf="showPhoto" class="material-icons upload-icon" (click)="editPhoto()">
-            cloud_upload
-          </i>
-          <!-- Display Image -->
-          <amplify-s3-image [path]="photo.imageUrl" [options]="{'level': 'private'}" *ngIf="showPhoto">
+          <i class="material-icons upload-icon" (click)="editPhoto()" *ngIf="showPhoto">cloud_upload</i>
+          <amplify-s3-image [path]="userPhoto" [options]="{'level': 'private'}" *ngIf="showPhoto" (click)="editPhoto()">
           </amplify-s3-image>
-          <!-- Photo Picker -->
           <amplify-photo-picker *ngIf="!showPhoto" path="image" [storageOptions]="{'level': 'private'}"
             (uploaded)="onImageUploaded($event)">
           </amplify-photo-picker>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col d-flex justify-content-between" *ngFor="let photo of user.photos">
+        <amplify-s3-image [path]="photo" [options]="{'level': 'private'}" (selected)="onAlbumImageSelected($event)">
+        </amplify-s3-image>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from "aws-amplify";
 import { APIService } from "../API.service";
-import { Photo } from "../photo";
+import { User } from "../models/user";
 
 @Component({
   selector: 'app-home',
@@ -11,11 +11,13 @@ import { Photo } from "../photo";
 })
 export class HomeComponent implements OnInit {
 
+  userId: string;
   userName: string;
+  userPhoto: string;
   showPhoto: boolean;
   userCreated: boolean;
 
-  photo = new Photo('', '');
+  user = new User('', '', []);
 
   constructor(
     private _api: APIService,
@@ -24,18 +26,41 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
+    this.showPhoto = false;
+
     Auth.currentAuthenticatedUser({ bypassCache: false })
       .then(async user => {
+
+        this.userId = user.attributes.sub;
         this.userName = user.attributes.email;
+
+        this.user.id = this.userId;
+        this.user.username = this.userName;
+        this.user.photos = [];
+
+        let result = await this._api.GetUser(this.userId);
+
+        if (!result) {
+
+          await this._api.CreateUser(this.user)
+        } else {
+
+          this.user = new User(
+            this.userId,
+            result.username,
+            result.photos
+          );
+        }
       })
       .catch(err => console.log(err));
   }
 
   async onImageUploaded(e: any) {
 
-    this.photo.imageUrl = e.key;
+    this.userPhoto = e.key;
+    this.user.photos.push(this.userPhoto);
 
-    await this._api.CreatePhoto(this.photo);
+    let result = await this._api.UpdateUser(this.user);
 
     this.showPhoto = true;
   }
@@ -52,5 +77,10 @@ export class HomeComponent implements OnInit {
         this._router.navigate(['/auth']);
       })
       .catch(err => console.log(err));
+  }
+
+  onAlbumImageSelected(event: any) {
+
+    window.open(event, '_blank');
   }
 }

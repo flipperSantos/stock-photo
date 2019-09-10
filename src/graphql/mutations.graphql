@@ -1,19 +1,22 @@
 # this is an auto generated file. This will be overwritten
-mutation CreatePhoto($input: CreatePhotoInput!) {
-  createPhoto(input: $input) {
+mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
     id
-    imageUrl
+    username
+    photos
   }
 }
-mutation UpdatePhoto($input: UpdatePhotoInput!) {
-  updatePhoto(input: $input) {
+mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(input: $input) {
     id
-    imageUrl
+    username
+    photos
   }
 }
-mutation DeletePhoto($input: DeletePhotoInput!) {
-  deletePhoto(input: $input) {
+mutation DeleteUser($input: DeleteUserInput!) {
+  deleteUser(input: $input) {
     id
-    imageUrl
+    username
+    photos
   }
 }

@@ -2,15 +2,15 @@
 
 const awsmobile = {
     "aws_project_region": "us-west-2",
-    "aws_cognito_identity_pool_id": "us-west-2:1683bc5e-23d7-4609-8fec-a5d6d37ccef6",
+    "aws_cognito_identity_pool_id": "us-west-2:1e1bf05f-6e32-48a3-b3bb-e3c85b92aceb",
     "aws_cognito_region": "us-west-2",
-    "aws_user_pools_id": "us-west-2_1kmAhpKuh",
-    "aws_user_pools_web_client_id": "1vdhschfsjl1r4b396gm1ufmqk",
+    "aws_user_pools_id": "us-west-2_IDpeh0IOy",
+    "aws_user_pools_web_client_id": "2442fom21aleuj01d755c8sabe",
     "oauth": {},
-    "aws_appsync_graphqlEndpoint": "https://mrx3e52i3jbhphhxebek2dklha.appsync-api.us-west-2.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "https://hu4rru4xo5g53op56quxqfs2oe.appsync-api.us-west-2.amazonaws.com/graphql",
     "aws_appsync_region": "us-west-2",
     "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
-    "aws_user_files_s3_bucket": "stock-photo-test3abc2d4c4f2b4c77849f12ae99f5f4c1-dev",
+    "aws_user_files_s3_bucket": "stockphototestcab47f61653443049c0f7ad4a19ad15c-dev",
     "aws_user_files_s3_bucket_region": "us-west-2"
 };
 

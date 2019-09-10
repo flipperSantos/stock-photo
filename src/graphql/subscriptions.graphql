@@ -1,19 +1,22 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreatePhoto {
-  onCreatePhoto {
+subscription OnCreateUser {
+  onCreateUser {
     id
-    imageUrl
+    username
+    photos
   }
 }
-subscription OnUpdatePhoto {
-  onUpdatePhoto {
+subscription OnUpdateUser {
+  onUpdateUser {
     id
-    imageUrl
+    username
+    photos
   }
 }
-subscription OnDeletePhoto {
-  onDeletePhoto {
+subscription OnDeleteUser {
+  onDeleteUser {
     id
-    imageUrl
+    username
+    photos
   }
 }

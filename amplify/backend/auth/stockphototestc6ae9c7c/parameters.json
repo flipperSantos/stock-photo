@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "stockphototestee0cb73f_identitypool_ee0cb73f",
+    "identityPoolName": "stockphototestc6ae9c7c_identitypool_c6ae9c7c",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "stockpee0cb73f",
-    "userPoolName": "stockphototestee0cb73f_userpool_ee0cb73f",
+    "resourceNameTruncated": "stockpc6ae9c7c",
+    "userPoolName": "stockphototestc6ae9c7c_userpool_c6ae9c7c",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,9 +28,9 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "stockpee0cb73f_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "stockpc6ae9c7c_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "stockphototestee0cb73f",
+    "resourceName": "stockphototestc6ae9c7c",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
