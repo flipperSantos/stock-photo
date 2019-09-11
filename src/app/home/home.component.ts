@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from "aws-amplify";
-import { APIService } from "../API.service";
+import { APIService, GetUserQuery } from "../API.service";
 import { User } from "../models/user";
 
 @Component({
@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   userPhoto: string;
   showPhoto: boolean;
   userCreated: boolean;
+  userFetched: GetUserQuery;
 
   user = new User('', '', []);
 
@@ -38,17 +39,17 @@ export class HomeComponent implements OnInit {
         this.user.username = this.userName;
         this.user.photos = [];
 
-        let result = await this._api.GetUser(this.userId);
+        this.userFetched = await this._api.GetUser(this.userId);
 
-        if (!result) {
+        if (!this.userFetched) {
 
           await this._api.CreateUser(this.user)
         } else {
 
           this.user = new User(
             this.userId,
-            result.username,
-            result.photos
+            this.userFetched.username,
+            this.userFetched.photos
           );
         }
       })
@@ -60,7 +61,7 @@ export class HomeComponent implements OnInit {
     this.userPhoto = e.key;
     this.user.photos.push(this.userPhoto);
 
-    let result = await this._api.UpdateUser(this.user);
+    await this._api.UpdateUser(this.user);
 
     this.showPhoto = true;
   }
